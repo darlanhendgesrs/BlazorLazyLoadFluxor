@@ -103,6 +103,21 @@ To ensure the application knows which modules to load dynamically, we **declare 
 
 By adding this dictionary (`_lazyModulesToBeLoaded`), we enable the system to dynamically load the correct WebAssembly module when a user navigates to a feature that isn't initially loaded.
 
+
+
+
+### Attention: ###
+
+In the following example where we declare:
+
+    {
+        { "lazy-load", "Feature1.wasm" }
+    };
+
+
+⚠️ **The path represents the wasm. So everything that comes after lazy-load/* will use Feature1.wasm.**
+
+
 ## App.razor file
 
 ### ⚠️ **Important: Custom Dependency Injection**
