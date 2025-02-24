@@ -9,23 +9,18 @@ namespace Shared.LazyLoad;
 
 public class LazyLoadModules(ICustomServiceProvider CustomProvider, LazyAssemblyLoader AssemblyLoader, IConfiguration Configuration, ILogger<ILazyLoadModules> Logger) : ILazyLoadModules
 {
-    private IServiceCollection _dynamicServices = new ServiceCollection();
     public List<Assembly> LoadedAssemblies { get; private set; } = new();
     public async Task LoadModuleAsync(string path)
     {
         try
         {
-            var assemblyName = LazyLoadVariables.AssembliesToBeLoaded.GetValueOrDefault(path);
+            if (path.IndexOf("/") > 0)
+                path = path.Split("/").First();
 
-            if (assemblyName == null)
-            {
-                Logger.LogDebug($"{path} is not supposed to be lazy loaded.");
-                return;
-            }
+            var assemblyName = LazyLoadVariables.AssembliesToBeLoaded.GetValueOrDefault(path.ToLower());
 
-            if (LazyLoadVariables.AssembliesNameLoaded.Any(l => l == assemblyName))
+            if (assemblyName == null || LazyLoadVariables.AssembliesNameLoaded.Any(l => l == assemblyName))
             {
-                Logger.LogDebug($"{assemblyName} is loaded already.");
                 return;
             }
 
