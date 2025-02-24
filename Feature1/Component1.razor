@@ -1,0 +1,30 @@
+﻿@page "/lazy-load"
+@using Microsoft.Extensions.Logging
+@using Shared.LazyLoad
+@using Fluxor
+@using Feature1.State
+@using Microsoft.Extensions.DependencyInjection
+@inject ICustomServiceProvider CustomProvider
+@inject ILogger<Component1> Logger
+
+
+<h3>Feature 1 with Fluxor</h3>
+
+<p>Counter: @state?.Value.Counter</p>
+
+<button @onclick="IncrementCounter">Increment</button>
+
+@code {
+    private IDispatcher dispatcher = null!;
+    private IState<Feature1State> state = null!;
+
+    protected override void OnInitialized()
+    {
+        var provider = CustomProvider.CurrentProvider;
+        dispatcher = provider.GetRequiredService<IDispatcher>();
+        state = provider.GetRequiredService<IState<Feature1State>>();
+    }
+
+    private void IncrementCounter()
+        => dispatcher.Dispatch(new IncrementFeature1CounterAction());
+}
