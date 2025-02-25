@@ -10,6 +10,7 @@ namespace Shared.LazyLoad;
 public class LazyLoadModules(ICustomServiceProvider CustomProvider, LazyAssemblyLoader AssemblyLoader, IConfiguration Configuration, ILogger<ILazyLoadModules> Logger) : ILazyLoadModules
 {
     public List<Assembly> LoadedAssemblies { get; private set; } = new();
+
     public async Task LoadModuleAsync(string path)
     {
         try
