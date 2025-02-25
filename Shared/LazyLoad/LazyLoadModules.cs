@@ -20,9 +20,7 @@ public class LazyLoadModules(ICustomServiceProvider CustomProvider, LazyAssembly
             var assemblyName = LazyLoadVariables.AssembliesToBeLoaded.GetValueOrDefault(path.ToLower());
 
             if (assemblyName == null || LazyLoadVariables.AssembliesNameLoaded.Any(l => l == assemblyName))
-            {
                 return;
-            }
 
             await LoadAssemblyAsync(assemblyName);
         }
@@ -34,35 +32,35 @@ public class LazyLoadModules(ICustomServiceProvider CustomProvider, LazyAssembly
     private async Task LoadAssemblyAsync(string assemblyName)
     {
         var assemblies = await AssemblyLoader.LoadAssembliesAsync(new[] { assemblyName });
-
+        
         LoadedAssemblies.AddRange(assemblies);
+        
         LazyLoadVariables.AssembliesNameLoaded.Add(assemblyName);
-        Logger.LogDebug($"{assemblyName} has been loaded.");
-
+        
         foreach (var assembly in assemblies)
             RegisterModuleServices(assembly);
 
-        Logger.LogDebug($"{assemblyName} - DI has been loaded.");
     }
     private void RegisterModuleServices(Assembly assembly)
     {
         var bootstrapperType = assembly.GetTypes()
             .FirstOrDefault(t => typeof(IModuleBootstrapper).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
-        if (bootstrapperType != null)
-        {
-            var moduleBootstrapper = (IModuleBootstrapper)Activator.CreateInstance(bootstrapperType, CustomProvider)!;
+        if (bootstrapperType == null)
+            return;
 
-            var _dynamicServices = new ServiceCollection();
+        var moduleBootstrapper = (IModuleBootstrapper)Activator.CreateInstance(bootstrapperType, CustomProvider)!;
 
-            moduleBootstrapper.ConfigureServices(_dynamicServices, Configuration);
+        var _dynamicServices = new ServiceCollection();
 
-            CustomProvider.UpdateProvider(CustomProvider.MergeServiceProviders(_dynamicServices));
+        moduleBootstrapper.ConfigureServices(_dynamicServices, Configuration);
 
-            var provider = CustomProvider.CurrentProvider;
-            var store = provider.GetRequiredService<IStore>();
+        CustomProvider.UpdateProvider(CustomProvider.MergeServiceProviders(_dynamicServices));
 
-            store.InitializeAsync();
-        }
+        var provider = CustomProvider.CurrentProvider;
+        
+        var store = provider.GetRequiredService<IStore>();
+
+        store.InitializeAsync();
     }
 }
