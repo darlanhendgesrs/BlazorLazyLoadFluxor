@@ -196,7 +196,13 @@ When `LoadModuleAsync(path)` is executed, the following sequence occurs:
 
 This ensures that the new module is fully integrated into the application at runtime, without requiring a restart or pre-registration.
 
-By using this approach, the app efficiently loads microfrontend modules only when needed, reducing initial load times and ensuring a scalable architecture.
+By using this approach, the app efficiently loads micro frontend modules only when needed, reducing initial load times and ensuring a scalable architecture.
 
 Now, the application can dynamically load **Feature1.wasm** when the user navigates to the `lazy-load` route, and future modules can be added using the same approach.
+
+### Observation
+
+This process is complex for just a lazy loading and that's the reason many people don't work with it.
+The changes in the setup are quite significant.
+It's important to be aware of that.
 
