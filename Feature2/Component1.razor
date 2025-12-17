@@ -1,8 +1,10 @@
-﻿@page "/feature2"
-@using Microsoft.Extensions.Logging
+﻿@using Microsoft.Extensions.Logging
 @using Shared.LazyLoad
 @using Fluxor
 @using Microsoft.Extensions.DependencyInjection
+
+@page "/feature2"
+@inherits LazyComponentBase
 
 @inject ICustomServiceProvider CustomProvider
 @inject ILogger<Component1> Logger
@@ -13,16 +15,11 @@
 <button @onclick="IncrementCounter">Increment</button>
 
 @code {
-    private IServiceFeature2 serviceFeature2 = null!;
-
-    protected override void OnInitialized()
-    {
-        var provider = CustomProvider.CurrentProvider;
-        serviceFeature2 = provider.GetRequiredService<IServiceFeature2>();
-    }
+    [LazyInject] 
+    private IServiceFeature2 ServiceFeature2 { get; set; } = null!;
 
     private void IncrementCounter()
     {
-        serviceFeature2.Test();
+        ServiceFeature2.Test();
     }
 }

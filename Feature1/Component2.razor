@@ -1,35 +1,9 @@
 ﻿@page "/lazy-load/component2"
-@using Microsoft.Extensions.Logging
 @using Shared.LazyLoad
-@using Fluxor
-@using Feature1.State
-@using Microsoft.Extensions.DependencyInjection
-@inject ICustomServiceProvider CustomProvider
-@inject ILogger<Component2> Logger
-
+@inherits LazyComponentBase
 
 <h3>Feature 2 with Fluxor</h3>
 
-<p>Counter: @state?.Value.Counter</p>
+<p>Counter: @State?.Value.Counter</p>
 
 <button @onclick="IncrementCounter">Increment</button>
-
-@code {
-    private IDispatcher dispatcher = null!;
-    private IState<Feature1State> state = null!;
-    private IServiceFeature1 serviceFeature1 = null!;
-
-    protected override void OnInitialized()
-    {
-        var provider = CustomProvider.CurrentProvider;
-        dispatcher = provider.GetRequiredService<IDispatcher>();
-        state = provider.GetRequiredService<IState<Feature1State>>();
-        serviceFeature1 = provider.GetRequiredService<IServiceFeature1>();
-    }
-
-    private void IncrementCounter()
-    {
-        dispatcher.Dispatch(new IncrementFeature1CounterAction());
-        serviceFeature1.Test();
-    }
-}
