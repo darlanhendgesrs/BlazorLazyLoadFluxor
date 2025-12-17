@@ -14,7 +14,8 @@ builder.Services.AddFluxor(o => o.ScanAssemblies(typeof(Program).Assembly));
 
 Dictionary<string, string> _lazyModulesToBeLoaded = new()
 {
-    { "lazy-load", "Feature1.wasm" }
+    { "lazy-load", "Feature1.wasm" },
+    { "feature2", "Feature2.wasm" }
 };
 
 builder.Services.CustomServiceProviderBoostrap(_lazyModulesToBeLoaded);

@@ -1,0 +1,28 @@
+﻿@page "/feature2"
+@using Microsoft.Extensions.Logging
+@using Shared.LazyLoad
+@using Fluxor
+@using Microsoft.Extensions.DependencyInjection
+
+@inject ICustomServiceProvider CustomProvider
+@inject ILogger<Component1> Logger
+@inject NavigationManager Navigate
+
+<h3>Feature 2 with Fluxor</h3>
+
+<button @onclick="IncrementCounter">Increment</button>
+
+@code {
+    private IServiceFeature2 serviceFeature2 = null!;
+
+    protected override void OnInitialized()
+    {
+        var provider = CustomProvider.CurrentProvider;
+        serviceFeature2 = provider.GetRequiredService<IServiceFeature2>();
+    }
+
+    private void IncrementCounter()
+    {
+        serviceFeature2.Test();
+    }
+}

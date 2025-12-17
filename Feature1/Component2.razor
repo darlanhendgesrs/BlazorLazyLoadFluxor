@@ -17,14 +17,19 @@
 @code {
     private IDispatcher dispatcher = null!;
     private IState<Feature1State> state = null!;
+    private IServiceFeature1 serviceFeature1 = null!;
 
     protected override void OnInitialized()
     {
         var provider = CustomProvider.CurrentProvider;
         dispatcher = provider.GetRequiredService<IDispatcher>();
         state = provider.GetRequiredService<IState<Feature1State>>();
+        serviceFeature1 = provider.GetRequiredService<IServiceFeature1>();
     }
 
     private void IncrementCounter()
-        => dispatcher.Dispatch(new IncrementFeature1CounterAction());
+    {
+        dispatcher.Dispatch(new IncrementFeature1CounterAction());
+        serviceFeature1.Test();
+    }
 }

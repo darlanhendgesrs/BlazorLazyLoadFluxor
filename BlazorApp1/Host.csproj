@@ -20,6 +20,11 @@
 
 
 	<ItemGroup>
+		<BlazorWebAssemblyLazyLoad Include="Feature2.wasm" />
+		<ProjectReference Include="..\Feature2\Feature2.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
 	</ItemGroup>
 </Project>

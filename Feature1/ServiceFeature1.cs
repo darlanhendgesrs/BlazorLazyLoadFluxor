@@ -9,6 +9,6 @@ public class ServiceFeature1 : IServiceFeature1
 {
     public void Test()
     {
-        Console.WriteLine("Testing...");
+        Console.WriteLine($"ServiceFeature1 using DI");
     }
 }

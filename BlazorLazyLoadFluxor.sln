@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{734967
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroFrontends", "MicroFrontends", "{47A33C03-C67E-48B5-87C3-4BA6A6D40EF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature2", "Feature2\Feature2.csproj", "{B78A43F0-74DA-42F7-8776-A4F62C8175B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{A0166E0D-2516-4F04-98AF-54FC7A4D2524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0166E0D-2516-4F04-98AF-54FC7A4D2524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0166E0D-2516-4F04-98AF-54FC7A4D2524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78A43F0-74DA-42F7-8776-A4F62C8175B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78A43F0-74DA-42F7-8776-A4F62C8175B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78A43F0-74DA-42F7-8776-A4F62C8175B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78A43F0-74DA-42F7-8776-A4F62C8175B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{57255E00-4D78-4E1D-B53E-7BAD841F1A4A} = {73496799-2E5A-4CB0-9875-BEFBFAB5226D}
 		{C6D1598B-F7D2-4565-ADA4-4C5B2CE873B2} = {47A33C03-C67E-48B5-87C3-4BA6A6D40EF4}
+		{B78A43F0-74DA-42F7-8776-A4F62C8175B1} = {47A33C03-C67E-48B5-87C3-4BA6A6D40EF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C53DC68-AF4F-4B57-B5DD-263271D459D7}
